@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Persons from "./components/Person/Persons";
 import Header from "./components/common/Header";
 import SimpleContext from "./context/SimpleContext";
+import NewPerson from "./components/Person/NewPerson";
 
 class App extends Component {
     state = {
@@ -13,6 +14,9 @@ class App extends Component {
         showPersons: true,
         appTitle: "مدیریت کننده اشخاص"
     };
+
+    static contextType = SimpleContext;
+    //this.context
 
     handleShowPerson = () => {
         this.setState({ showPersons: !this.state.showPersons });
@@ -77,9 +81,9 @@ class App extends Component {
         if (showPersons) {
             person = (
                 <Persons
-                    persons={persons}
-                    personDelete={this.handleDeletePerson}
-                    personChange={this.handleNameChange}
+                // persons={persons}
+                // personDelete={this.handleDeletePerson}
+                // personChange={this.handleNameChange}
                 />
             );
         }
@@ -95,36 +99,9 @@ class App extends Component {
                 }}
             >
                 <div className="rtl text-center">
-                    <Header
-                    // personsLength={persons.length}
-                    // appTitle={this.state.appTitle}
-                    />
+                    <Header />
 
-                    <div className="m-2 p-2">
-                        <form
-                            className="form-inline justify-content-center"
-                            onSubmit={event => event.preventDefault()}
-                        >
-                            <div className="input-group w-25">
-                                <input
-                                    type="text"
-                                    placeholder="اسم بهم بده"
-                                    className="form-control"
-                                    onChange={this.setPerson}
-                                    value={this.state.person}
-                                />
-                                <div className="input-group-prepend">
-                                    <Button
-                                        type="submit"
-                                        variant="success"
-                                        size="sm"
-                                        className="fa fa-plus-square"
-                                        onClick={this.handleNewPerson}
-                                    />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                    <NewPerson />
 
                     <Button
                         onClick={this.handleShowPerson}
