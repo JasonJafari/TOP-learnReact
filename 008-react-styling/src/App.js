@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Alert, Button, Badge } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
 
 import Persons from "./components/Person/Persons";
 
@@ -12,7 +13,6 @@ class App extends Component {
 
     handleShowPerson = () => {
         this.setState({ showPersons: !this.state.showPersons });
-        // console.log(this.state.showPersons);
     };
 
     handleDeletePerson = id => {
@@ -20,6 +20,14 @@ class App extends Component {
         const persons = [...this.state.persons];
         const filteredPersons = persons.filter(p => p.id !== id); //! = =
         this.setState({ persons: filteredPersons });
+
+        const personIndex = persons.findIndex(p => p.id === id);
+        const person = persons[personIndex];
+
+        toast.error(`${person.fullname} با موفقیت حذف شد`, {
+            position: "top-right",
+            closeOnClick: true
+        });
     };
 
     handleNameChange = (event, id) => {
@@ -46,6 +54,12 @@ class App extends Component {
         if (person.fullname !== "" && person.fullname !== " ") {
             persons.push(person);
             this.setState({ persons, person: "" });
+            //Toast Benama
+            toast.success("شخصی با موفقیت اضافه شد.", {
+                position: "bottom-right",
+                closeButton: true,
+                closeOnClick: true
+            });
         }
     };
 
@@ -55,17 +69,6 @@ class App extends Component {
 
     render() {
         const { persons, showPersons } = this.state;
-        // InlineStyle text-align
-        // <div style={{ textAlign: "center" }}>
-        // const styles = {
-        //     textAlign: "center"
-        // };
-
-        // const bottonStyle = {
-        //     padding: "1em",
-        //     fontFamily: "BYekan",
-        //     backgroundColor: "pink"
-        // };
 
         let person = null;
 
@@ -132,6 +135,7 @@ class App extends Component {
                 </Button>
 
                 {person}
+                <ToastContainer />
             </div>
         );
     }
