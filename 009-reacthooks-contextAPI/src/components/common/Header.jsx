@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { Alert, Badge } from "react-bootstrap";
 import SimpleContext from "./../../context/SimpleContext";
 
-const Header = () => {
+const Header = ({ appTitle }) => {
     const context = useContext(SimpleContext);
 
-    const { persons, appTitle } = context.state;
+    const { persons } = context;
 
     let badgeStyle = "";
 
@@ -14,8 +14,6 @@ const Header = () => {
     if (persons.length <= 1) badgeStyle = "danger";
 
     return (
-        // <SimpleContext.Consumer>
-        // {context => (
         <div>
             <Alert variant="info">
                 <h2>{appTitle}</h2>
@@ -28,8 +26,6 @@ const Header = () => {
                 نفر می باشد
             </Alert>
         </div>
-        // )}
-        // </SimpleContext.Consumer>
     );
 };
 
