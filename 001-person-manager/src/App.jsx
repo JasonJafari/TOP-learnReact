@@ -1,14 +1,22 @@
-import React ,{ Component }from 'react';
+import React, { Component } from "react";
+import Persons from "./components/Person/Persons";
 
 class App extends Component {
-    state = {  }
-    render() { 
-        return ( 
+    state = {
+        persons: [
+            { firstname: "یونس", lastname: "قربانی", age: 27 },
+            { firstname: "ایمان", lastname: "مدائنی", age: 30 },
+            { firstname: "سجاد", lastname: "باقرزاده", age: 35 }
+        ]
+    };
+    render() {
+        const { persons } = this.state;
+        return (
             <div>
-                <h1>همه چیز روال هست</h1>
+                <Persons persons={persons} />
             </div>
-         );
+        );
     }
 }
- 
+
 export default App;
