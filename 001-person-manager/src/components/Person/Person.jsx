@@ -1,9 +1,13 @@
 import React from "react";
 
-const Person = ({ firstname, lastname, age }) => {
+import "./Person.css";
+
+const Person = ({ fullname, deleted, changed }) => {
     return (
-        <div>
-            <p>{`${firstname} ${lastname} ${age} سال دارم`}</p>
+        <div className="person">
+            <p>{`${fullname}`}</p>
+            <input type="text" placeholder={fullname} onChange={changed} />
+            <button onClick={deleted}>حذف</button>
         </div>
     );
 };
