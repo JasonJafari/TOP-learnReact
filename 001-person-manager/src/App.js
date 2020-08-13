@@ -3,11 +3,8 @@ import Persons from "./components/Person/Persons";
 
 class App extends Component {
     state = {
-        persons: [
-            { id: 1, fullname: "یونس قربانی" },
-            { id: 2, fullname: "ایمان مدائنی" },
-            { id: 3, fullname: "سجاد باقر زاده" }
-        ],
+        persons: [],
+        person: "",
         showPersons: false
     };
 
@@ -35,6 +32,20 @@ class App extends Component {
 
         persons[personIndex] = person;
         this.setState({ persons });
+    };
+
+    handleNewPerson = () => {
+        const persons = [...this.state.persons];
+        const person = {
+            id: Math.floor(Math.random() * 1000),
+            fullname: this.state.person
+        };
+        persons.push(person);
+        this.setState({ persons, person: "" });
+    };
+
+    setPerson = event => {
+        this.setState({ person: event.target.value });
     };
 
     render() {
@@ -68,11 +79,22 @@ class App extends Component {
                 <h2>مدیریت کننده اشخاص</h2>
                 <h4>تعداد اشخاص {persons.length} نفر می باشد</h4>
 
-                {person}
+                <div>
+                    <input
+                        type="text"
+                        placeholder="ساخت شخص جدید"
+                        style={{ direction: "rtl" }}
+                        onChange={this.setPerson}
+                        value={this.state.person}
+                    />
+                    <button onClick={this.handleNewPerson}>اضافه کن</button>
+                </div>
 
                 <button onClick={this.handleShowPerson} style={bottonStyle}>
                     نمایش اشخاص
                 </button>
+
+                {person}
             </div>
         );
     }
