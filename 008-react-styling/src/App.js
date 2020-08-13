@@ -67,6 +67,12 @@ class App extends Component {
 
         let person = null;
 
+        let badgeStyle = [];
+
+        if (persons.length >= 3) badgeStyle.push("badge-success");
+        if (persons.length <= 2) badgeStyle.push("badge-warning");
+        if (persons.length <= 1) badgeStyle.push("badge-danger");
+
         if (showPersons) {
             person = (
                 <Persons
@@ -84,7 +90,9 @@ class App extends Component {
                 </div>
                 <h5 className="alert alert-light">
                     تعداد اشخاص{" "}
-                    <span className="badge badge-pill badge-success">
+                    <span
+                        className={`badge badge-pill ${badgeStyle.join(" ")}`}
+                    >
                         {persons.length}
                     </span>{" "}
                     نفر می باشد
@@ -116,7 +124,7 @@ class App extends Component {
 
                 <button
                     onClick={this.handleShowPerson}
-                    className="btn btn-info"
+                    className={showPersons ? "btn btn-info" : "btn btn-danger"}
                 >
                     نمایش اشخاص
                 </button>
