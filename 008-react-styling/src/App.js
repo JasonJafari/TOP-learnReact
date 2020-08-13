@@ -5,7 +5,7 @@ class App extends Component {
     state = {
         persons: [],
         person: "",
-        showPersons: false
+        showPersons: true
     };
 
     handleShowPerson = () => {
@@ -52,15 +52,15 @@ class App extends Component {
         const { persons, showPersons } = this.state;
         // InlineStyle text-align
         // <div style={{ textAlign: "center" }}>
-        const styles = {
-            textAlign: "center"
-        };
+        // const styles = {
+        //     textAlign: "center"
+        // };
 
-        const bottonStyle = {
-            padding: "1em",
-            fontFamily: "BYekan",
-            backgroundColor: "pink"
-        };
+        // const bottonStyle = {
+        //     padding: "1em",
+        //     fontFamily: "BYekan",
+        //     backgroundColor: "pink"
+        // };
 
         let person = null;
 
@@ -75,25 +75,48 @@ class App extends Component {
         }
 
         return (
-            <div style={styles}>
-                <h2>مدیریت کننده اشخاص</h2>
-                <h4>تعداد اشخاص {persons.length} نفر می باشد</h4>
+            <div className="rtl text-center">
+                <div className="alert alert-info">
+                    <h2>مدیریت کننده اشخاص</h2>
+                </div>
+                <h5 className="alert alert-light">
+                    تعداد اشخاص{" "}
+                    <span className="badge badge-pill badge-success">
+                        {persons.length}
+                    </span>{" "}
+                    نفر می باشد
+                </h5>
 
-                <div>
-                    <input
-                        type="text"
-                        placeholder="ساخت شخص جدید"
-                        style={{ direction: "rtl" }}
-                        onChange={this.setPerson}
-                        value={this.state.person}
-                    />
-                    <button onClick={this.handleNewPerson}>اضافه کن</button>
+                <div className="m-2 p-2">
+                    <form
+                        className="form-inline justify-content-center"
+                        onSubmit={event => event.preventDefault()}
+                    >
+                        <div className="input-group w-25">
+                            <input
+                                type="text"
+                                placeholder="اسم بهم بده"
+                                className="form-control"
+                                onChange={this.setPerson}
+                                value={this.state.person}
+                            />
+                            <div className="input-group-prepend">
+                                <button
+                                    type="submit"
+                                    className="btn btn-sm btn-success fa fa-plus-square"
+                                    onClick={this.handleNewPerson}
+                                />
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
                 <button
                     onClick={this.handleShowPerson}
-                    className="btn btn-sm btn-success fa fa-plus-square"
-                />
+                    className="btn btn-info"
+                >
+                    نمایش اشخاص
+                </button>
 
                 {person}
             </div>
