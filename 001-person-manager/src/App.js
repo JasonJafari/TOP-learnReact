@@ -4,9 +4,9 @@ import Persons from "./components/Person/Persons";
 class App extends Component {
     state = {
         persons: [
-            { id: 1, firstname: "یونس", lastname: "قربانی" },
-            { id: 2, firstname: "ایمان", lastname: "مدائنی" },
-            { id: 3, firstname: "سجاد", lastname: "باقرزاده" }
+            { id: 1, fullname: "یونس قربانی" },
+            { id: 2, fullname: "ایمان مدائنی" },
+            { id: 3, fullname: "سجاد باقر زاده" }
         ],
         showPersons: false
     };
@@ -21,6 +21,20 @@ class App extends Component {
         const persons = [...this.state.persons];
         const filteredPersons = persons.filter(p => p.id !== id); //! = =
         this.setState({ persons: filteredPersons });
+    };
+
+    handleNameChange = (event, id) => {
+        const { persons: allPersons } = this.state;
+
+        const personIndex = allPersons.findIndex(p => p.id === id);
+        const person = allPersons[personIndex];
+        person.fullname = event.target.value;
+        console.log(event);
+
+        const persons = [...allPersons];
+
+        persons[personIndex] = person;
+        this.setState({ persons });
     };
 
     render() {
@@ -44,6 +58,7 @@ class App extends Component {
                 <Persons
                     persons={persons}
                     personDelete={this.handleDeletePerson}
+                    personChange={this.handleNameChange}
                 />
             );
         }
