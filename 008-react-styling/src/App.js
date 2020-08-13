@@ -40,8 +40,11 @@ class App extends Component {
             id: Math.floor(Math.random() * 1000),
             fullname: this.state.person
         };
-        persons.push(person);
-        this.setState({ persons, person: "" });
+
+        if (person.fullname !== "" && person.fullname !== " ") {
+            persons.push(person);
+            this.setState({ persons, person: "" });
+        }
     };
 
     setPerson = event => {
